@@ -4,12 +4,22 @@
 		<meta charset="utf-8">
 		<title>DataViz</title>
 		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script type="text/javascript" src="zips.js">
+		</script>
 	</head>
 	<body>
-		<div>
-			<h1>Nathan Young</h1>
-			<p>I recently graduated from Epicodus & I make electronic music.</p>
-		</div>
+		<script type="text/javascript">
+
+			var population = [];
+			dataset.forEach(function(item) {
+				// console.log(item.city + " " + item.state + " " + item._id + " " + item.pop);
+				population.push(item.pop);
+
+			});
+			console.log(population);
+
+		</script>
+
 
 	</body>
 </html>
