@@ -1,3 +1,7 @@
 div {
 	font-family: Helvetica;
 }
+
+svg {
+	background-color: pink;
+}

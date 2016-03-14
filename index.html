@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>DataViz</title>
-		<link rel="stylesheet" type="text/css" href="styles.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js" charset="utf-8"></script>
-		<script type="text/javascript" src="zips.js"></script>
-	</head>
-	<body>
-		<script type="text/javascript">
-			var population = [];
-			dataset.forEach(function(item) {
-				population.push(item.pop);
+
+<head>
+	<meta charset="utf-8">
+	<title>DataViz</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="zips.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		var dataset = [];
+		zips.forEach(function(item) {
+			dataset.push(item.pop);
+		});
+
+		//width and height
+		var w = 800;
+		var h = 800;
+
+		var yScale = d3.scale.linear()
+			.domain([0, d3.max(dataset, function(d){
+				return d;
+			})])
+			.range([0, h])
+
+		//Create SVG element
+		var svg = d3.select("body")
+			.append("svg")
+			.attr("width", w)
+			.attr("height", h);
+
+		svg.selectAll("rect")
+			.data(dataset)
+			.enter()
+			.append("rect")
+			// set x coordinate
+			.attr('x', function(data, index) {
+				return index * 27;
+				// return width /
+			})
+			// set y coordinate
+			.attr('y', function(data) {
+				return h - yScale(data)
+			})
+			.attr('width', 10)
+			.style('height', function(data) {
+				return yScale(data)
 			});
-			console.log(population);
-		</script>
-	</body>
+	</script>
+</body>
+
 </html>
