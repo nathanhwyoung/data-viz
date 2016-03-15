@@ -47,18 +47,17 @@ https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
 			.append("rect")
 			// set x coordinate
 			.attr('x', function(data, index) {
-				// return index * 27;
-				// return (w / dataset.length) * (index + 1);
-				return xScale(data)
+				return xScale(data);
 			})
 			// set y coordinate
 			.attr('y', function(data) {
-				return h - yScale(data)
+				return h - yScale(data);
 			})
-			.attr('width', 10)
+			.attr('width', xScale.rangeBand)
 			.style('height', function(data) {
-				return yScale(data)
-			});
+				return yScale(data);
+			})
+			.attr("fill", "yellow");
 	</script>
 </body>
 
