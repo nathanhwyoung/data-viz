@@ -4,6 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>DataViz</title>
+	<link rel="stylesheet" href="
+https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js" charset="utf-8"></script>
 	<script type="text/javascript" src="zips.js"></script>
@@ -17,14 +19,21 @@
 		});
 
 		//width and height
-		var w = 800;
-		var h = 800;
+		// var w = 1400;
+		// var h = 900;
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+
+		var xScale = d3.scale.ordinal() // orders
+			.domain(dataset)
+			.rangeBands([0, w], 0.25, 0.25); // (width of data), padding between, padding outside
 
 		var yScale = d3.scale.linear()
-			.domain([0, d3.max(dataset, function(d){
+			.domain([0, d3.max(dataset, function(d) {
 				return d;
 			})])
-			.range([0, h])
+			.range([0, h]);
+
 
 		//Create SVG element
 		var svg = d3.select("body")
@@ -38,8 +47,9 @@
 			.append("rect")
 			// set x coordinate
 			.attr('x', function(data, index) {
-				return index * 27;
-				// return width /
+				// return index * 27;
+				// return (w / dataset.length) * (index + 1);
+				return xScale(data)
 			})
 			// set y coordinate
 			.attr('y', function(data) {
